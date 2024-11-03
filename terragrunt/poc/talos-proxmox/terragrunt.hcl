@@ -21,7 +21,8 @@ include "envcommon" {
 # Configure the version of the module to use in this environment. This allows you to promote new versions one
 # environment at a time (e.g., qa -> stage -> prod).
 terraform {
-  source = "${include.envcommon.locals.base_source_url}?ref=talos-proxmox-v0.0.1" # renovate: github-releases=sebiklamar/terraform-modules
+#   source = "${include.envcommon.locals.base_source_url}?ref=talos-proxmox-v0.0.2" # renovate: github-releases=sebiklamar/terraform-modules
+  source = "git::git@github.com:sebiklamar/terraform-modules.git//modules/talos-proxmox?ref=talos-proxmox-v0.0.1" # renovate: github-releases=sebiklamar/terraform-modules
 }
 
 inputs = {
