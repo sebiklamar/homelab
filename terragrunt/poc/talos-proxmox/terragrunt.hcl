@@ -25,7 +25,7 @@ terraform {
   # ToDo see #2
   # source = "${include.envcommon.locals.base_source_url}?ref=talos-proxmox-v0.0.1" # renovate: github-releases=sebiklamar/terraform-modules
   # using hard-coded URL instead of envcommon due to #2
-  source = "git::git@github.com:sebiklamar/terraform-modules.git//modules/talos-proxmox?ref=talos-proxmox-v0.0.1"
+  source = "git::git@github.com:sebiklamar/terraform-modules.git//modules/talos-proxmox?ref=talos-proxmox-v0.0.2"
 }
 
 inputs = {
