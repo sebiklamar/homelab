@@ -31,7 +31,7 @@ terraform {
 inputs = {
   image = {
     version = "v1.8.1"
-    update_version = "v1.8.1" # renovate: github-releases=siderolabs/talos
+    update_version = "v1.8.2" # renovate: github-releases=siderolabs/talos
   }
 
   cluster = {
