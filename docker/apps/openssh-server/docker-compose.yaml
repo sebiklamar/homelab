@@ -1,7 +1,7 @@
 version: "2.1"
 services:
   endlessh:
-    image: lscr.io/linuxserver/endlessh:latest
+    image: lscr.io/linuxserver/endlessh:latest@sha256:1ba907783c782f2900347a42d730d97ccc88ab50e9c3403657211ca711d02ecc
     container_name: endlessh
     environment:
       - PUID=1000
@@ -17,7 +17,7 @@ services:
       - 10022:2222
     restart: unless-stopped
   openssh-server:
-    image: lscr.io/linuxserver/openssh-server:latest
+    image: lscr.io/linuxserver/openssh-server:latest@sha256:53ea39d2485c0c96dc9abaae18cad4f29d0fcf33ad1c05f6d73b7f1e22ec215c
     container_name: openssh-server
     hostname: openssh-server #optional
     environment:
