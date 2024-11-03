@@ -1,0 +1,41 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "extends": [
+    "config:best-practices",
+    ":rebaseStalePrs"
+  ],
+  "assignees": [
+    "sebiklamar"
+  ],
+  "terragrunt": {
+    "versioning": "regex:^((?<compatibility>.*)-v|v*)(?<major>\\d+)\\.(?<minor>\\d+)\\.(?<patch>\\d+)$",
+    "branchPrefix": "renovate_",
+    "additionalBranchPrefix": "{{packageFileDir}}_",
+    "prBodyColumns": [
+      "Package",
+      "Package file",
+      "Update",
+      "Change"
+    ]
+  },
+  "kustomize": {
+    "fileMatch": [
+      "(^|/)kustomization\\.ya?ml(\\.j2)?$"
+    ]
+  },
+  "customManagers": [
+    {
+      "customType": "regex",
+      "fileMatch": [
+        "\\.hcl$",
+        "\\.tf$",
+        "\\.tftpl$",
+        "\\.yaml$",
+        "\\.sh$"
+      ],
+      "matchStrings": [
+        "(?<currentValue>[\\w+\\.\\-]*)['\",;]*\\s*#\\s?renovate: (?<datasource>\\S+)=(?<depName>\\S+)\\s?(registry=(?<registryUrl>\\S+))?\\s?(versioning=(?<versioning>\\S+))?"
+      ]
+    }
+  ]
+}
