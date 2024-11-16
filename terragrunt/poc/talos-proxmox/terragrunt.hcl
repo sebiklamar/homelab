@@ -28,47 +28,81 @@ terraform {
   source = "git::git@github.com:sebiklamar/terraform-modules.git//modules/talos-proxmox?ref=talos-proxmox-v0.0.2"
 }
 
+locals {
+  env      = "${include.envcommon.locals.env}"
+  vlan_id  = 104
+  ctrl_cpu = 2
+  ctrl_ram = 4096
+  work_cpu = 2
+  work_ram = 4096
+  domain   = "test.iseja.net"
+}
+
 inputs = {
   image = {
-    version = "v1.8.1"
+    version        = "v1.8.1"
     update_version = "v1.8.3" # renovate: github-releases=siderolabs/talos
   }
 
   cluster = {
-    name            = "talos"
-    endpoint        = "192.168.1.102"
-    gateway         = "192.168.1.1"
-    talos_version   = "v1.8"
-    proxmox_cluster = "homelab"
+    # ToDo resolve redundant def. of a talos version (in contrast to var.image.version)
+    talos_version   = "v1.8.1"
+    name            = "${include.envcommon.locals.env}-talos-tg"
+    proxmox_cluster = "iseja-lab"
+    endpoint        = "10.7.4.111"
+    gateway         = "10.7.4.1"
   }
 
   nodes = {
-    "ctrl-00" = {
-      host_node     = "abel"
+    "${local.env}-ctrl-01.${local.domain}" = {
+      host_node     = "pve2"
       machine_type  = "controlplane"
-      ip            = "192.168.1.100"
-      mac_address   = "BC:24:11:2E:C8:00"
-      vm_id         = 800
-      cpu           = 8
-      ram_dedicated = 20480
+      ip            = "10.7.4.111"
+      vm_id         = 7004111
+      vlan_id       = "${local.vlan_id}"
+      cpu           = "${local.ctrl_cpu}"
+      ram_dedicated = "${local.ctrl_ram}"
+      # update        = true
     }
-    "ctrl-01" = {
-      host_node     = "euclid"
+    "${local.env}-ctrl-02.${local.domain}" = {
+      host_node     = "pve2"
       machine_type  = "controlplane"
-      ip            = "192.168.1.101"
-      mac_address   = "BC:24:11:2E:C8:01"
-      vm_id         = 801
-      cpu           = 4
-      ram_dedicated = 20480
+      ip            = "10.7.4.112"
+      vm_id         = 7004112
+      vlan_id       = "${local.vlan_id}"
+      cpu           = "${local.ctrl_cpu}"
+      ram_dedicated = "${local.ctrl_ram}"
+      # update        = true
     }
-    "ctrl-02" = {
-      host_node     = "cantor"
+    "${local.env}-ctrl-03.${local.domain}" = {
+      host_node     = "pve2"
       machine_type  = "controlplane"
-      ip            = "192.168.1.102"
-      mac_address   = "BC:24:11:2E:C8:02"
-      vm_id         = 802
-      cpu           = 4
-      ram_dedicated = 4096
+      ip            = "10.7.4.113"
+      vm_id         = 7004113
+      vlan_id       = "${local.vlan_id}"
+      cpu           = "${local.ctrl_cpu}"
+      ram_dedicated = "${local.ctrl_ram}"
+      # update        = true
+    }
+    "${local.env}-work-01.${local.domain}" = {
+      host_node     = "pve2"
+      machine_type  = "worker"
+      ip            = "10.7.4.114"
+      vm_id         = 7004114
+      vlan_id       = "${local.vlan_id}"
+      cpu           = "${local.work_cpu}"
+      ram_dedicated = "${local.work_ram}"
+      # update        = true
+    }
+    "${local.env}-work-02.${local.domain}" = {
+      host_node     = "pve2"
+      machine_type  = "worker"
+      ip            = "10.7.4.115"
+      vm_id         = 7004115
+      vlan_id       = "${local.vlan_id}"
+      cpu           = "${local.work_cpu}"
+      ram_dedicated = "${local.work_ram}"
+      # update        = true
     }
   }
 
