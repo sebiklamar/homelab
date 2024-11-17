@@ -22,10 +22,10 @@ include "envcommon" {
 # environment at a time (e.g., qa -> stage -> prod).
 terraform {
   # comment regex overrides terragrunt nonSemVer matching, replacing s/talos-proxmox-v0.0.1/v0.0.3
-  # ToDo see issue #2
+  # see e.g. issue #2 (https://github.com/sebiklamar/homelab/pull/2)
   # source = "${include.envcommon.locals.base_source_url}?ref=v0.0.3" # renovate: github-releases=sebiklamar/terraform-modules
-  # using hard-coded URL instead of envcommon due to #2
-  source = "git::git@github.com:sebiklamar/terraform-modules.git//modules/vehagn-talos?ref=vehagn-k8s-v0.0.1"
+  # using hard-coded URL instead of envcommon instead
+  source = "git::git@github.com:sebiklamar/terraform-modules.git//modules/vehagn-k8s?ref=vehagn-k8s-v0.0.2"
 }
 
 locals {
@@ -34,76 +34,91 @@ locals {
   ctrl_cpu = 2
   ctrl_ram = 4096
   work_cpu = 2
-  work_ram = 4096
+  work_ram = 3072
   domain   = "test.iseja.net"
+  datastore_id = "local-enc"
 }
 
-# inputs = {
-#   image = {
-#     version        = "v1.8.1"
-#     update_version = "v1.8.2" # renovate: github-releases=siderolabs/talos
-#   }
+# TODO: node configuration hard-coded in tf module; needs to be moved specified here as input variables
+inputs = {
 
-#   cluster = {
-#     # ToDo resolve redudundant implementation
-#     talos_version   = "v1.8.2"
-#     name            = "${include.envcommon.locals.env}-talos-tg"
-#     proxmox_cluster = "iseja-lab"
-#     endpoint        = "10.7.4.111"
-#     gateway         = "10.7.4.1"
-#   }
+  image = {
+    version        = "v1.8.1"
+    update_version = "v1.8.2" # renovate: github-releases=siderolabs/talos
+    schematic      = file("assets/talos/schematic.yaml")
+  }
+  
+  cluster = {
+    # ToDo resolve redudundant implementation
+    talos_version   = "v1.8.2"
+    name            = "${local.env}-talos-tg"
+    proxmox_cluster = "iseja-lab"
+    endpoint        = "10.7.4.111"
+    gateway         = "10.7.4.1"
+  }
 
-#   nodes = {
-#     "${local.env}-ctrl-01.${local.domain}" = {
-#       host_node     = "pve2"
-#       machine_type  = "controlplane"
-#       ip            = "10.7.4.111"
-#       vm_id         = 7004111
-#       vlan_id       = "${local.vlan_id}"
-#       cpu           = "${local.ctrl_cpu}"
-#       ram_dedicated = "${local.ctrl_ram}"
-#       # update        = true
-#     }
-#     "${local.env}-ctrl-02.${local.domain}" = {
-#       host_node     = "pve2"
-#       machine_type  = "controlplane"
-#       ip            = "10.7.4.112"
-#       vm_id         = 7004112
-#       vlan_id       = "${local.vlan_id}"
-#       cpu           = "${local.ctrl_cpu}"
-#       ram_dedicated = "${local.ctrl_ram}"
-#       # update        = true
-#     }
-#     "${local.env}-ctrl-03.${local.domain}" = {
-#       host_node     = "pve2"
-#       machine_type  = "controlplane"
-#       ip            = "10.7.4.113"
-#       vm_id         = 7004113
-#       vlan_id       = "${local.vlan_id}"
-#       cpu           = "${local.ctrl_cpu}"
-#       ram_dedicated = "${local.ctrl_ram}"
-#       # update        = true
-#     }
-#     "${local.env}-work-01.${local.domain}" = {
-#       host_node     = "pve2"
-#       machine_type  = "worker"
-#       ip            = "10.7.4.114"
-#       vm_id         = 7004114
-#       vlan_id       = "${local.vlan_id}"
-#       cpu           = "${local.work_cpu}"
-#       ram_dedicated = "${local.work_ram}"
-#       # update        = true
-#     }
-#     "${local.env}-work-02.${local.domain}" = {
-#       host_node     = "pve2"
-#       machine_type  = "worker"
-#       ip            = "10.7.4.115"
-#       vm_id         = 7004115
-#       vlan_id       = "${local.vlan_id}"
-#       cpu           = "${local.work_cpu}"
-#       ram_dedicated = "${local.work_ram}"
-#       # update        = true
-#     }
-#   }
+  nodes = {
+    "${local.env}-ctrl-01.${local.domain}" = {
+      host_node     = "pve2"
+      machine_type  = "controlplane"
+      ip            = "10.7.4.111"
+      vm_id         = 7004111
+      cpu           = "${local.ctrl_cpu}"
+      datastore_id  = "${local.datastore_id}"
+      ram_dedicated = "${local.ctrl_ram}"
+      vlan_id       = "${local.vlan_id}"
+      # update        = true
+    }
+    "${local.env}-ctrl-02.${local.domain}" = {
+      host_node     = "pve2"
+      machine_type  = "controlplane"
+      ip            = "10.7.4.112"
+      vm_id         = 7004112
+      cpu           = "${local.ctrl_cpu}"
+      datastore_id  = "${local.datastore_id}"
+      ram_dedicated = "${local.ctrl_ram}"
+      vlan_id       = "${local.vlan_id}"
+      # update        = true
+    }
+    "${local.env}-ctrl-03.${local.domain}" = {
+      host_node     = "pve2"
+      machine_type  = "controlplane"
+      ip            = "10.7.4.113"
+      vm_id         = 7004113
+      cpu           = "${local.ctrl_cpu}"
+      datastore_id  = "${local.datastore_id}"
+      ram_dedicated = "${local.ctrl_ram}"
+      vlan_id       = "${local.vlan_id}"
+      # update        = true
+    }
+    "${local.env}-work-01.${local.domain}" = {
+      host_node     = "pve2"
+      machine_type  = "worker"
+      ip            = "10.7.4.114"
+      vm_id         = 7004114
+      cpu           = "${local.ctrl_cpu}"
+      datastore_id  = "${local.datastore_id}"
+      ram_dedicated = "${local.ctrl_ram}"
+      vlan_id       = "${local.vlan_id}"
+      # update        = true
+    }
+    "${local.env}-work-02.${local.domain}" = {
+      host_node     = "pve2"
+      machine_type  = "worker"
+      ip            = "10.7.4.115"
+      vm_id         = 7004115
+      cpu           = "${local.ctrl_cpu}"
+      datastore_id  = "${local.datastore_id}"
+      ram_dedicated = "${local.ctrl_ram}"
+      vlan_id       = "${local.vlan_id}"
+      # update        = true
+    }
+  }
 
-# }
+  # # TODO: allow cilium config as input variable (defined in terragrunt.hcl)
+  # cilium = {
+  #   values  = file("assets/cilium/values.yaml")
+  #   install = file("assets/cilium/cilium-install.yaml")
+  # }
+
+}
