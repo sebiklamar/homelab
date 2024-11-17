@@ -8,8 +8,8 @@ spec:
     - name: internal
       namespace: gateway
   hostnames:
-    - "whoami-ingress.example.com"
-    - "whoami-ingress2.example.com"
+    - "whoami-ingress.example.net"
+    - "whoami-ingress2.example.net"
   rules:
     - matches:
         - path:
