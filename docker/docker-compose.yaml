@@ -20,7 +20,7 @@ services:
     restart: unless-stopped
 
   openssh-server:
-    image: lscr.io/linuxserver/openssh-server:latest@sha256:a40b2dc8d0bc72e49355fbdf695ccf0ad18f268e7543c53f7f5ac83ee2fcc10b
+    image: lscr.io/linuxserver/openssh-server:latest@sha256:cf87b7e16e7b951ca26638c3cbc272afb79c553aab76ae5ede4c671e8e538364
     container_name: openssh-server
     hostname: openssh-server #optional
     environment:
