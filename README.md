@@ -1,6 +1,6 @@
 # UNDER CONSTRUCTION
 
-That mono-repo is still in an evolving state with several PoCs (proof-of-concepts), i.e. _not_ containing any production k8s/homelab implementation, yet.
+That mono-repo is still in an evolving state with several PoCs (proof-of-concepts), i.e. _not_ containing any fully-fledged k8s/homelab implementation, yet.
 
 Nevertheless, you can find some interesting PoCs for
 
@@ -8,6 +8,6 @@ Nevertheless, you can find some interesting PoCs for
 - talhelper (for talos) feat. environment-specific definitions (DRY)
 - tofu (terraform) code for IaC-ing proxmox VMs, needed for talos
 - terragrunt for even more IaC, thus allowing the use of versioned terraform/tofu modules for several environments
-- k8s apps definition leveraging `kustomize`'s patching and transformer capabilities for defining a base and (similar to the environment-specfic course done for talhelper)
+- k8s apps definition leveraging `kustomize`'s patching and transformer capabilities for defining a base and dev/staging/prod (similar to the environment-specfic course done for talhelper and terragrunt/tofu)
 
-It's all about IaC and DRY -- and my future homelab (based on [vehagn/homelab]) :-)
+It's all about IaC and DRY -- and my future homelab (based on [vehagn/homelab](https://github.com/vehagn/homelab)) :-)
