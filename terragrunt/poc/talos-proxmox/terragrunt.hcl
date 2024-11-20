@@ -47,7 +47,7 @@ inputs = {
   cluster = {
     # ToDo resolve redundant def. of a talos version (in contrast to var.image.version)
     talos_version   = "v1.8.1"
-    name            = "${include.envcommon.locals.env}-talos-tg"
+    name            = "${local.env}-talos-tg"
     proxmox_cluster = "iseja-lab"
     endpoint        = "10.7.4.111"
     gateway         = "10.7.4.1"
