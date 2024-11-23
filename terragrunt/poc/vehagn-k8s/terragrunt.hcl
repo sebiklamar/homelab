@@ -13,7 +13,7 @@ include "root" {
 # Include the envcommon configuration for the component. The envcommon configuration contains settings that are common
 # for the component across all environments.
 include "envcommon" {
-  path   = "${dirname(find_in_parent_folders())}/_envcommon/vehagn-k8s.hcl"
+  path = "${dirname(find_in_parent_folders())}/_envcommon/vehagn-k8s.hcl"
   # We want to reference the variables from the included config in this configuration, so we expose it.
   expose = true
 }
@@ -25,17 +25,18 @@ terraform {
   # see e.g. issue #2 (https://github.com/sebiklamar/homelab/pull/2)
   # source = "${include.envcommon.locals.base_source_url}?ref=v0.0.3" # renovate: github-releases=sebiklamar/terraform-modules
   # using hard-coded URL instead of envcommon instead
-  source = "git::git@github.com:sebiklamar/terraform-modules.git//modules/vehagn-k8s?ref=vehagn-k8s-v0.0.2"
+  source = "git::git@github.com:sebiklamar/terraform-modules.git//modules/vehagn-k8s?ref=vehagn-k8s-v0.0.3"
 }
 
 locals {
-  env      = "${include.envcommon.locals.env}"
-  vlan_id  = 104
-  ctrl_cpu = 2
-  ctrl_ram = 4096
-  work_cpu = 2
-  work_ram = 3072
-  domain   = "test.iseja.net"
+  env          = "${include.envcommon.locals.env}"
+  storage_vmid = 9411
+  vlan_id      = 104
+  ctrl_cpu     = 2
+  ctrl_ram     = 4096
+  work_cpu     = 2
+  work_ram     = 3072
+  domain       = "test.iseja.net"
   datastore_id = "local-enc"
 }
 
@@ -47,7 +48,7 @@ inputs = {
     update_version = "v1.8.3" # renovate: github-releases=siderolabs/talos
     schematic      = file("assets/talos/schematic.yaml")
   }
-  
+
   cluster = {
     # ToDo resolve redudundant implementation
     talos_version   = "v1.8.2"
@@ -69,39 +70,39 @@ inputs = {
       vlan_id       = "${local.vlan_id}"
       # update        = true
     }
-    "${local.env}-ctrl-02.${local.domain}" = {
-      host_node     = "pve2"
-      machine_type  = "controlplane"
-      ip            = "10.7.4.112"
-      vm_id         = 7004112
-      cpu           = "${local.ctrl_cpu}"
-      datastore_id  = "${local.datastore_id}"
-      ram_dedicated = "${local.ctrl_ram}"
-      vlan_id       = "${local.vlan_id}"
-      # update        = true
-    }
-    "${local.env}-ctrl-03.${local.domain}" = {
-      host_node     = "pve2"
-      machine_type  = "controlplane"
-      ip            = "10.7.4.113"
-      vm_id         = 7004113
-      cpu           = "${local.ctrl_cpu}"
-      datastore_id  = "${local.datastore_id}"
-      ram_dedicated = "${local.ctrl_ram}"
-      vlan_id       = "${local.vlan_id}"
-      # update        = true
-    }
-    "${local.env}-work-01.${local.domain}" = {
-      host_node     = "pve2"
-      machine_type  = "worker"
-      ip            = "10.7.4.114"
-      vm_id         = 7004114
-      cpu           = "${local.ctrl_cpu}"
-      datastore_id  = "${local.datastore_id}"
-      ram_dedicated = "${local.ctrl_ram}"
-      vlan_id       = "${local.vlan_id}"
-      # update        = true
-    }
+    # "${local.env}-ctrl-02.${local.domain}" = {
+    #   host_node     = "pve2"
+    #   machine_type  = "controlplane"
+    #   ip            = "10.7.4.112"
+    #   vm_id         = 7004112
+    #   cpu           = "${local.ctrl_cpu}"
+    #   datastore_id  = "${local.datastore_id}"
+    #   ram_dedicated = "${local.ctrl_ram}"
+    #   vlan_id       = "${local.vlan_id}"
+    #   # update        = true
+    # }
+    # "${local.env}-ctrl-03.${local.domain}" = {
+    #   host_node     = "pve2"
+    #   machine_type  = "controlplane"
+    #   ip            = "10.7.4.113"
+    #   vm_id         = 7004113
+    #   cpu           = "${local.ctrl_cpu}"
+    #   datastore_id  = "${local.datastore_id}"
+    #   ram_dedicated = "${local.ctrl_ram}"
+    #   vlan_id       = "${local.vlan_id}"
+    #   # update        = true
+    # }
+    # "${local.env}-work-01.${local.domain}" = {
+    #   host_node     = "pve2"
+    #   machine_type  = "worker"
+    #   ip            = "10.7.4.114"
+    #   vm_id         = 7004114
+    #   cpu           = "${local.ctrl_cpu}"
+    #   datastore_id  = "${local.datastore_id}"
+    #   ram_dedicated = "${local.ctrl_ram}"
+    #   vlan_id       = "${local.vlan_id}"
+    #   # update        = true
+    # }
     "${local.env}-work-02.${local.domain}" = {
       host_node     = "pve2"
       machine_type  = "worker"
@@ -120,5 +121,14 @@ inputs = {
   #   values  = file("assets/cilium/values.yaml")
   #   install = file("assets/cilium/cilium-install.yaml")
   # }
+
+  volumes = {
+  #   pv-test = {
+  #     node    = "pve2"
+  #     size    = "100M"
+  #     vmid    = "${local.storage_vmid}"
+  #     storage = "${local.datastore_id}"
+  #   }
+  }
 
 }
