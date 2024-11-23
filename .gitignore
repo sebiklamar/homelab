@@ -13,7 +13,7 @@ clusterconfig
 *.tfstate.*
 *.tfvars
 *.tfvars.json
-*.lock.hcl
+# *.lock.hcl
 override.tf
 override.tf.json
 *_override.tf
