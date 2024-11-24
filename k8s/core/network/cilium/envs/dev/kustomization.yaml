@@ -7,7 +7,11 @@ kind: Kustomization
 
 resources:
   - ../../base
-  - ip-pool.yaml
+  - ip-pool-local.yaml
+  - ip-pool-bgp.yaml
+  - bgp-cluster-config.yaml
+  - bgp-peer-config.yaml
+  - bgp-advertisement.yaml
 
 helmCharts:
   - name: cilium

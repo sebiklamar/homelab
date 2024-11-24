@@ -5,3 +5,5 @@ ingressController:
   service:
     annotations:
       io.cilium/lb-ipam-ips: 10.7.8.30
+bgpControlPlane:
+    enabled: true
