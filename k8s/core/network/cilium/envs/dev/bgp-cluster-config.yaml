@@ -1,0 +1,26 @@
+---
+apiVersion: cilium.io/v2alpha1
+kind: CiliumBGPClusterConfig
+metadata:
+  name: cilium-bgp
+spec:
+  nodeSelector: # Delete this line to apply this policy to all cluster members
+    matchLabels: # Delete this line to apply this policy to all cluster members
+      io.cilium/bgp: worker # Delete this line to apply this policy to all cluster members
+
+  bgpInstances:
+  - name: "instance-64523"
+    localASN: 64523 # Use your cluster's ASN here!
+    peers:
+    - name: "peer-64520-gw2"
+      peerASN: 64520
+      peerAddress: 10.7.8.2
+      # peerAddress: fd00:10:0:0::1
+      peerConfigRef:
+        name: "cilium-peer"
+    - name: "peer-64520-gw3"
+      peerASN: 64520
+      peerAddress: 10.7.8.3
+      # peerAddress: fd00:11:0:0::1
+      peerConfigRef:
+        name: "cilium-peer"
