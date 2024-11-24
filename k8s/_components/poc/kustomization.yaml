@@ -8,4 +8,4 @@ resources:
 
 components:
   - ../base   # configures domain replacement
-  - ../../transformers/prefix-domain
+  - ../../_transformers/prefix-domain

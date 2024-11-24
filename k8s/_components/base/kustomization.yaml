@@ -1,0 +1,9 @@
+apiVersion: kustomize.config.k8s.io/v1alpha1
+kind: Component
+
+components:
+  - ../../_transformers/replace-domain
+
+# replacements:
+#   - path: ../../_transformers/replace-domain/ingress-replace-domain.yaml
+#   - path: ../../_transformers/replace-domain/httproute-replace-domain.yaml
