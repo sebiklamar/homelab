@@ -8,6 +8,5 @@ resources:
   - deployment.yaml
   - http-route.yaml
   # - ingress.yaml
-
 # components:
-#   - ../../../../components/base
+#   - ../../../../_components/base
