@@ -27,6 +27,6 @@ override.tf.json
 *.raw
 
 # Misc
-output
+output*
 *.cert
 *.key
