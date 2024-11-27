@@ -33,14 +33,13 @@ locals {
   storage_vmid = 9411
   vlan_id      = 104
   ctrl_cpu     = 2
-  ctrl_ram     = 4096
+  ctrl_ram     = 3072
   work_cpu     = 2
   work_ram     = 3072
   domain       = "test.iseja.net"
   datastore_id = "local-enc"
 }
 
-# TODO: node configuration hard-coded in tf module; needs to be moved specified here as input variables
 inputs = {
 
   image = {
@@ -52,7 +51,7 @@ inputs = {
   cluster = {
     # ToDo resolve redudundant implementation
     talos_version   = "v1.8.2"
-    name            = "${local.env}-talos-tg"
+    name            = "${local.env}-vehagn-tg"
     proxmox_cluster = "iseja-lab"
     endpoint        = "10.7.4.111"
     gateway         = "10.7.4.1"
@@ -97,9 +96,9 @@ inputs = {
     #   machine_type  = "worker"
     #   ip            = "10.7.4.114"
     #   vm_id         = 7004114
-    #   cpu           = "${local.ctrl_cpu}"
+    #   cpu           = "${local.work_cpu}"
     #   datastore_id  = "${local.datastore_id}"
-    #   ram_dedicated = "${local.ctrl_ram}"
+    #   ram_dedicated = "${local.work_ram}"
     #   vlan_id       = "${local.vlan_id}"
     #   # update        = true
     # }
@@ -108,9 +107,9 @@ inputs = {
       machine_type  = "worker"
       ip            = "10.7.4.115"
       vm_id         = 7004115
-      cpu           = "${local.ctrl_cpu}"
+      cpu           = "${local.work_cpu}"
       datastore_id  = "${local.datastore_id}"
-      ram_dedicated = "${local.ctrl_ram}"
+      ram_dedicated = "${local.work_ram}"
       vlan_id       = "${local.vlan_id}"
       # update        = true
     }
