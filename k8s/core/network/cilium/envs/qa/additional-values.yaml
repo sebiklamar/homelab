@@ -1,0 +1,9 @@
+ingressController:
+  enabled: false
+  default: true
+  loadbalancerMode: shared
+  service:
+    annotations:
+      io.cilium/lb-ipam-ips: 10.8.2.30
+bgpControlPlane:
+    enabled: true

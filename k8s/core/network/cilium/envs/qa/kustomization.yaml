@@ -3,11 +3,10 @@ kind: Kustomization
 
 # DISABLED: do not prefix name nor do other env.-specific transformations
 # components:
-#   - ../../../../../_components/dev
+#   - ../../../../../_components/qa
 
 resources:
   - ../../base
-  - ip-pool-local.yaml
   - ip-pool-bgp.yaml
   - bgp-cluster-config.yaml
 

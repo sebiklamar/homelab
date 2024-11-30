@@ -3,3 +3,5 @@ kind: Kustomization
 
 resources:
   - announce.yaml
+  - bgp-peer-config.yaml
+  - bgp-advertisement.yaml

@@ -2,11 +2,7 @@ apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 
 resources:
-  # - cluster-param.yaml
   - ns.yaml
   - svc.yaml
   - deployment.yaml
   - http-route.yaml
-  # - ingress.yaml
-# components:
-#   - ../../../../_components/base
