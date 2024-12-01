@@ -91,17 +91,17 @@ inputs = {
     #   vlan_id       = "${local.vlan_id}"
     #   # update        = true
     # }
-    # "${local.env}-work-01.${local.domain}" = {
-    #   host_node     = "pve2"
-    #   machine_type  = "worker"
-    #   ip            = "10.7.8.134"
-    #   vm_id         = 7008134
-    #   cpu           = "${local.work_cpu}"
-    #   datastore_id  = "${local.datastore_id}"
-    #   ram_dedicated = "${local.work_ram}"
-    #   vlan_id       = "${local.vlan_id}"
-    #   # update        = true
-    # }
+    "${local.env}-work-01.${local.domain}" = {
+      host_node     = "pve2"
+      machine_type  = "worker"
+      ip            = "10.7.8.134"
+      vm_id         = 7008134
+      cpu           = "${local.work_cpu}"
+      datastore_id  = "${local.datastore_id}"
+      ram_dedicated = "${local.work_ram}"
+      vlan_id       = "${local.vlan_id}"
+      # update        = true
+    }
     "${local.env}-work-02.${local.domain}" = {
       host_node     = "pve2"
       machine_type  = "worker"
