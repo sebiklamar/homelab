@@ -3,8 +3,6 @@ kind: CiliumLoadBalancerIPPool
 metadata:
   name: bgp-pool
 spec:
-  # cidrs:
-  #   - cidr: 10.8.3.0/24 
   blocks:
     - start: 10.8.3.10
       stop: 10.8.3.250
