@@ -1,0 +1,68 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: unifi
+  namespace: unifi
+  labels:
+    app: unifi
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: unifi
+  template:
+    metadata:
+      namespace: unifi
+      labels:
+        app: unifi
+    spec:
+      nodeSelector:
+        topology.kubernetes.io/zone: pve2
+      securityContext:
+        runAsNonRoot: false
+        # runAsNonRoot: true
+        # runAsUser: 999
+        # runAsGroup: 999
+        # fsGroup: 999
+        # fsGroupChangePolicy: OnRootMismatch
+        # seccompProfile:
+        #   type: RuntimeDefault
+      containers:
+        - name: mongodb
+          image: docker.io/mongo:8.0@sha256:c165af1a407eefce644877bf5a59ba3d9ca762e62b4f1723c919dc08dc32f4d0
+          # securityContext:
+          #   allowPrivilegeEscalation: false
+          #   readOnlyRootFilesystem: false
+          #   capabilities:
+          #     drop: [ "ALL" ]
+          ports:
+            - name: mongodb
+              containerPort: 27017
+          env:
+            - name: PUID
+              value: '999'
+            - name: PGID
+              value: '999'
+            - name: TZ
+              value: Europe/Berlin
+          resources:
+            requests:
+              cpu: 50m
+              memory: 900Mi
+            limits:
+              cpu: 1000m
+              memory: 1300Mi
+          volumeMounts:
+            - name: mongodb-init
+              mountPath: /docker-entrypoint-initdb.d/init-mongo.js
+              subPath: init-mongo.js
+              readOnly: true
+            - name: mongodb-data
+              mountPath: /data/db
+      volumes:
+        - name: mongodb-init
+          configMap:
+            name: mongodb-init
+        - name: mongodb-data
+          persistentVolumeClaim:
+            claimName: mongodb-data

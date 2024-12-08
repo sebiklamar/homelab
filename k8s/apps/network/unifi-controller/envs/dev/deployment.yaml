@@ -1,0 +1,14 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: unifi
+  namespace: unifi
+spec:
+  replicas: 1
+  template:
+    spec:
+      nodeSelector:
+        topology.kubernetes.io/zone: pve5
+      containers:
+        - name: mongodb
+          image: docker.io/mongo:8.0@sha256:c165af1a407eefce644877bf5a59ba3d9ca762e62b4f1723c919dc08dc32f4d0

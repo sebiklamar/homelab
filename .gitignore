@@ -1,3 +1,6 @@
+# Kubernetes
+k8s/**/charts/
+
 # SOPS
 .decrypted~*
 

@@ -25,22 +25,28 @@ terraform {
   # see e.g. issue #2 (https://github.com/sebiklamar/homelab/pull/2)
   # source = "${include.envcommon.locals.base_source_url}?ref=v0.0.3" # renovate: github-releases=sebiklamar/terraform-modules
   # using hard-coded URL instead of envcommon instead
-  source = "git::git@github.com:sebiklamar/terraform-modules.git//modules/vehagn-k8s?ref=vehagn-k8s-v0.0.3"
+  # source = "git::git@github.com:sebiklamar/terraform-modules.git//modules/vehagn-k8s?ref=vehagn-k8s-v0.2.0"
+  source = "git::git@github.com:sebiklamar/terraform-modules.git//modules/vehagn-k8s?ref=HEAD"
 }
 
 locals {
   env          = "${include.envcommon.locals.env}"
+  root_path    = "${dirname(find_in_parent_folders())}"
   storage_vmid = 9813
   vlan_id      = 108
   ctrl_cpu     = 2
   ctrl_ram     = 3072
   work_cpu     = 2
   work_ram     = 3072
+  cpu_type     = "x86-64-v2-AES"
   domain       = "test.iseja.net"
   datastore_id = "local-enc"
+  cilium_path  = "k8s/core/network/cilium"
 }
 
 inputs = {
+
+  env = "${local.env}"
 
   image = {
     version        = "v1.8.3"
@@ -58,7 +64,8 @@ inputs = {
   }
 
   nodes = {
-    "${local.env}-ctrl-01.${local.domain}" = {
+    # "${local.env}-ctrl-01.${local.domain}" = {
+    "${local.env}-ctrl-01" = {
       host_node     = "pve2"
       machine_type  = "controlplane"
       ip            = "10.7.8.131"
@@ -91,18 +98,21 @@ inputs = {
     #   vlan_id       = "${local.vlan_id}"
     #   # update        = true
     # }
-    "${local.env}-work-01.${local.domain}" = {
-      host_node     = "pve2"
+    # "${local.env}-work-01.${local.domain}" = {
+    "${local.env}-work-01" = {
+      host_node     = "pve5"
       machine_type  = "worker"
       ip            = "10.7.8.134"
       vm_id         = 7008134
       cpu           = "${local.work_cpu}"
+      cpu_type      = "custom-x86-64-v2-AES-AVX"
       datastore_id  = "${local.datastore_id}"
       ram_dedicated = "${local.work_ram}"
       vlan_id       = "${local.vlan_id}"
       # update        = true
     }
-    "${local.env}-work-02.${local.domain}" = {
+    # "${local.env}-work-02.${local.domain}" = {
+    "${local.env}-work-02" = {
       host_node     = "pve2"
       machine_type  = "worker"
       ip            = "10.7.8.135"
@@ -115,19 +125,15 @@ inputs = {
     }
   }
 
-  # # TODO: allow cilium config as input variable (defined in terragrunt.hcl)
-  # cilium = {
-  #   values  = file("assets/cilium/values.yaml")
-  #   install = file("assets/cilium/cilium-install.yaml")
-  # }
+  cilium_values  = "${local.root_path}/../${local.cilium_path}/envs/${local.env}/values.yaml"
 
   volumes = {
-  #   pv-test = {
-  #     node    = "pve2"
-  #     size    = "100M"
-  #     vmid    = "${local.storage_vmid}"
-  #     storage = "${local.datastore_id}"
-  #   }
+    pv-mongodb = {
+      node    = "pve5"
+      size    = "500M"
+      vmid    = "${local.storage_vmid}"
+      storage = "${local.datastore_id}"
+    }
   }
 
 }
