@@ -53,7 +53,7 @@ services:
       - backnet
 
   unifi-network-application:
-    image: lscr.io/linuxserver/unifi-network-application:latest@sha256:9019e3eb5a02e1813a1700e114deccc98466a7e52a72030702fcc3e83fd9aafa
+    image: lscr.io/linuxserver/unifi-network-application:latest@sha256:380542dc302fb2a3a57bc5c183a99b2ffb2cac08f2a399ce873420a7ef2123b9
     container_name: unifi-network-application
     environment:
       - PUID=1000
