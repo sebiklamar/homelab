@@ -43,7 +43,7 @@ services:
     restart: unless-stopped
 
   unifidb:
-    image: docker.io/mongo:8.0@sha256:c165af1a407eefce644877bf5a59ba3d9ca762e62b4f1723c919dc08dc32f4d0
+    image: docker.io/mongo:8.0@sha256:767a428d203c170c5b5a6da78ff2af74b4f8d65d2cfb6f809d2bb21a5c5c03c3
     container_name: unifidb
     volumes:
       - /srv/docker-compose/hosts/unifi-db/data/db:/data/db
