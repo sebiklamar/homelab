@@ -1,7 +1,7 @@
 version: '3'
 services:
   borgmatic:
-    image: b3vis/borgmatic@sha256:2ab4971757e0b4faae74afc01b347d48b93a0e51b7275d05f9ea816570f6f52d
+    image: b3vis/borgmatic@sha256:c1060a1a2d8c51600f6f73338c26569f53442e70732bdfbf16af447f68695d75
     container_name: borgmatic
     volumes:
       - ${VOLUME_SOURCE}:/mnt/source:ro           # backup source
