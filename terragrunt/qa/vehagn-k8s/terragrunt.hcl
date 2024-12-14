@@ -25,11 +25,12 @@ terraform {
   # see e.g. issue #2 (https://github.com/sebiklamar/homelab/pull/2)
   # source = "${include.envcommon.locals.base_source_url}?ref=v0.0.3" # renovate: github-releases=sebiklamar/terraform-modules
   # using hard-coded URL instead of envcommon instead
-  source = "git::git@github.com:sebiklamar/terraform-modules.git//modules/vehagn-k8s?ref=vehagn-k8s-v0.0.3"
+  source = "git::git@github.com:sebiklamar/terraform-modules.git//modules/vehagn-k8s?ref=vehagn-k8s-v0.2.0"
 }
 
 locals {
   env          = "${include.envcommon.locals.env}"
+  root_path    = "${dirname(find_in_parent_folders())}"
   storage_vmid = 9812
   vlan_id      = 108
   ctrl_cpu     = 2
@@ -38,9 +39,12 @@ locals {
   work_ram     = 3072
   domain       = "test.iseja.net"
   datastore_id = "local-enc"
+  cilium_path  = "k8s/core/network/cilium"
 }
 
 inputs = {
+
+  env = "${local.env}"
 
   image = {
     version        = "v1.8.3"
@@ -115,11 +119,7 @@ inputs = {
     }
   }
 
-  # # TODO: allow cilium config as input variable (defined in terragrunt.hcl)
-  # cilium = {
-  #   values  = file("assets/cilium/values.yaml")
-  #   install = file("assets/cilium/cilium-install.yaml")
-  # }
+  cilium_values  = "${local.root_path}/../${local.cilium_path}/envs/${local.env}/values.yaml"
 
   volumes = {
   #   pv-test = {
