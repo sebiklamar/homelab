@@ -4,4 +4,4 @@ metadata:
   name: whoami
   namespace: whoami
   annotations:
-    io.cilium/lb-ipam-ips: 10.8.3.35
+    io.cilium/lb-ipam-ips: 10.8.3.82
