@@ -27,7 +27,7 @@ spec:
         #   type: RuntimeDefault
       containers:
         - name: ssh
-          image: ghcr.io/linuxserver/openssh-server:latest
+          image: ghcr.io/linuxserver/openssh-server:latest@sha256:8f12729c4e77dcbcf26144055c1e77b77fabf1fd25e9f21e8c90a5adb6073fe1
           # securityContext:
           #   allowPrivilegeEscalation: false
           #   readOnlyRootFilesystem: true
