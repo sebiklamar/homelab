@@ -7,8 +7,3 @@ metadata:
     # app: whoami
 spec:
   replicas: 1
-  template:
-    spec:
-      containers:
-        - name: whoami
-          image: ghcr.io/traefik/whoami:v1.10
