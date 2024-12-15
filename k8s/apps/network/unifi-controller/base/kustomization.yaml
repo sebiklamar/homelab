@@ -3,9 +3,11 @@ kind: Kustomization
 
 resources:
   - ns.yaml
-  # - svc.yaml
-  - deployment.yaml
-  - pvc.yaml
+  - pvc-db.yaml
+  - deployment-db.yaml
+  - deployment-frontend.yaml
+  - svc-db.yaml
+  - svc-frontend.yaml
 
 configMapGenerator:
   - name: mongodb-init

@@ -8,5 +8,5 @@ components:
   - ../../../../../_components/dev
 
 patches:
-  # - path: svc.yaml
-  - path: deployment.yaml
+  - path: deployment-db.yaml
+  - path: svc-frontend.yaml

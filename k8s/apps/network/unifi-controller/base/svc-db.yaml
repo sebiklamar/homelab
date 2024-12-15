@@ -1,0 +1,13 @@
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: mongodb
+  namespace: unifi
+spec:
+  selector:
+    app: mongodb
+  ports:
+    - name: mongodb
+      port: 27017
+      targetPort: mongodb

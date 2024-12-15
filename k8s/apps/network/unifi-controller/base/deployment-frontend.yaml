@@ -1,0 +1,92 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: unifi-controller
+  namespace: unifi
+  labels:
+    app: unifi-controller
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: unifi-controller
+  template:
+    metadata:
+      namespace: unifi
+      labels:
+        app: unifi-controller
+    spec:
+      securityContext:
+        runAsNonRoot: false
+        # runAsNonRoot: true
+        # runAsUser: 999
+        # runAsGroup: 999
+        # fsGroup: 999
+        # fsGroupChangePolicy: OnRootMismatch
+        # seccompProfile:
+        #   type: RuntimeDefault
+      containers:
+        - name: unifi-network-application
+          image: lscr.io/linuxserver/unifi-network-application:8.6.9-ls70
+          env:
+            - name: PUID
+              value: '999'
+            - name: PGID
+              value: '999'
+            - name: TZ
+              value: Europe/Berlin
+            - name: MONGO_USER
+              value: unifiuser
+            - name: MONGO_PASS
+              value: unifipass
+            - name: MONGO_HOST
+              value: dev-mongodb
+            - name: MONGO_PORT
+              value: '27017'
+            - name: MONGO_DBNAME
+              value: unifidb
+          resources:
+            requests:
+              cpu: 50m
+              memory: 500Mi
+            limits:
+              cpu: 1000m
+              memory: 1000Mi
+          ports:
+            - name: web-admin
+              containerPort: 8443
+              protocol: TCP
+            - name: device-comm
+              containerPort: 8080
+              protocol: TCP
+            - name: stun
+              containerPort: 3478
+              protocol: UDP
+            - name: secure-redirect
+              containerPort: 8843
+              protocol: TCP
+            - name: http-redirect
+              containerPort: 8880
+              protocol: TCP
+            - name: speedtest
+              containerPort: 6789
+              protocol: TCP
+            - name: unifi-disc
+              containerPort: 10001
+              protocol: UDP
+            - name: unifi-disc-l2
+              containerPort: 1900
+              protocol: UDP
+#    volumes:
+#      - /srv/docker-compose/hosts/unifi/data:/config
+#    ports:
+#      - 8443:8443
+#      - 3478:3478/udp
+#      - 10001:10001/udp
+#      - 8080:8080
+#      - 1900:1900/udp #optional
+#      - 8843:8843 #optional
+#      - 8880:8880 #optional
+#      - 6789:6789 #optional
+#      - 5514:5514/udp #optional

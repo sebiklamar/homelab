@@ -1,20 +1,21 @@
+---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: unifi
+  name: mongodb
   namespace: unifi
   labels:
-    app: unifi
+    app: mongodb
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: unifi
+      app: mongodb
   template:
     metadata:
       namespace: unifi
       labels:
-        app: unifi
+        app: mongodb
     spec:
       nodeSelector:
         topology.kubernetes.io/zone: pve2
@@ -29,7 +30,7 @@ spec:
         #   type: RuntimeDefault
       containers:
         - name: mongodb
-          image: docker.io/mongo:8.0@sha256:c165af1a407eefce644877bf5a59ba3d9ca762e62b4f1723c919dc08dc32f4d0
+          image: docker.io/mongo:7.0
           # securityContext:
           #   allowPrivilegeEscalation: false
           #   readOnlyRootFilesystem: false
@@ -48,10 +49,10 @@ spec:
           resources:
             requests:
               cpu: 50m
-              memory: 900Mi
+              memory: 100Mi
             limits:
-              cpu: 1000m
-              memory: 1300Mi
+              cpu: 500m
+              memory: 500Mi
           volumeMounts:
             - name: mongodb-init
               mountPath: /docker-entrypoint-initdb.d/init-mongo.js
