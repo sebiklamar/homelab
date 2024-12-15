@@ -23,6 +23,9 @@
       "(^|/)kustomization\\.ya?ml(\\.j2)?$"
     ]
   },
+  "kubernetes": {
+    "fileMatch": ["(^|/)k8s/.+\\.yaml$"]
+  },
   "customManagers": [
     {
       "customType": "regex",
