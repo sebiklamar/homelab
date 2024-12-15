@@ -27,7 +27,7 @@ spec:
         #   type: RuntimeDefault
       containers:
         - name: ssh
-          image: ghcr.io/linuxserver/openssh-server:9.7_p1-r4-ls179
+          image: lscr.io/linuxserver/openssh-server:9.7_p1-r4-ls179
           # securityContext:
           #   allowPrivilegeEscalation: false
           #   readOnlyRootFilesystem: true
@@ -38,9 +38,9 @@ spec:
               containerPort: 2222
           env:
             - name: PUID
-              value: '999'
+              value: "999"
             - name: PGID
-              value: '999'
+              value: "999"
             - name: TZ
               value: Europe/Berlin
             - name: PUBLIC_KEY
