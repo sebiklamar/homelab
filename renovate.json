@@ -40,5 +40,8 @@
         "(?<currentValue>[\\w+\\.\\-]*)['\",;]*\\s*#\\s?renovate: (?<datasource>\\S+)=(?<depName>\\S+)\\s?(registry=(?<registryUrl>\\S+))?\\s?(versioning=(?<versioning>\\S+))?"
       ]
     }
+  ],
+  "packageRules": [
+    { "matchPackageNames": ["docker.io/mongo"], "allowedVersions": "<=7", "description": "keep mongodb at v7 due to unifi-network-controller" }
   ]
 }
