@@ -1,0 +1,26 @@
+# vim:sw=2:ts=2:expandtab:ai
+---
+# Environment
+env/base:
+  - changed-files:
+      - any-glob-to-any-file: "k8s/*/*/base/**"
+env/prod:
+  - changed-files:
+      - any-glob-to-any-file: 
+        - "k8s/*/*/envs/prod/**"
+        - "terragrunt/prod/**"
+env/qa:
+  - changed-files:
+      - any-glob-to-any-file: 
+        - "k8s/*/*/envs/qa/**"
+        - "terragrunt/qa/**"
+env/dev:
+  - changed-files:
+      - any-glob-to-any-file: 
+        - "k8s/*/*/envs/dev/**"
+        - "terragrunt/dev/**"
+env/poc:
+  - changed-files:
+      - any-glob-to-any-file: 
+        - "k8s/*/*/envs/poc/**"
+        - "terragrunt/poc/**"
