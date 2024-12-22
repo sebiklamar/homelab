@@ -35,8 +35,10 @@ locals {
   storage_vmid = 9813
   vlan_id      = 108
   ctrl_cpu     = 2
+  ctrl_disk_size = 10
   ctrl_ram     = 3072
   work_cpu     = 2
+  work_disk_size = 10
   work_ram     = 3072
   cpu_type     = "x86-64-v2-AES"
   domain       = "test.iseja.net"
@@ -49,8 +51,8 @@ inputs = {
   env = "${local.env}"
 
   image = {
-    version        = "v1.8.3"
-    update_version = "v1.8.3" # renovate: github-releases=siderolabs/talos
+    version        = "v1.8.4"
+    update_version = "v1.8.4" # renovate: github-releases=siderolabs/talos
     schematic      = file("assets/talos/schematic.yaml")
   }
 
@@ -64,17 +66,17 @@ inputs = {
   }
 
   nodes = {
-    # "${local.env}-ctrl-01.${local.domain}" = {
-    "${local.env}-ctrl-01" = {
+    "${local.env}-ctrl-01.${local.domain}" = {
       host_node     = "pve2"
       machine_type  = "controlplane"
       ip            = "10.7.8.131"
       vm_id         = 7008131
       cpu           = "${local.ctrl_cpu}"
       datastore_id  = "${local.datastore_id}"
+      disk_size     = "${local.ctrl_disk_size}"
       ram_dedicated = "${local.ctrl_ram}"
       vlan_id       = "${local.vlan_id}"
-      # update        = true
+      update        = true
     }
     # "${local.env}-ctrl-02.${local.domain}" = {
     #   host_node     = "pve2"
@@ -98,8 +100,7 @@ inputs = {
     #   vlan_id       = "${local.vlan_id}"
     #   # update        = true
     # }
-    # "${local.env}-work-01.${local.domain}" = {
-    "${local.env}-work-01" = {
+    "${local.env}-work-01.${local.domain}" = {
       host_node     = "pve5"
       machine_type  = "worker"
       ip            = "10.7.8.134"
@@ -107,18 +108,20 @@ inputs = {
       cpu           = "${local.work_cpu}"
       cpu_type      = "custom-x86-64-v2-AES-AVX"
       datastore_id  = "${local.datastore_id}"
-      ram_dedicated = "${local.work_ram}"
+      disk_size     = "${local.work_disk_size}"
+      # ram_dedicated = "${local.work_ram}"
+      ram_dedicated = 5120
       vlan_id       = "${local.vlan_id}"
       # update        = true
     }
-    # "${local.env}-work-02.${local.domain}" = {
-    "${local.env}-work-02" = {
+    "${local.env}-work-02.${local.domain}" = {
       host_node     = "pve2"
       machine_type  = "worker"
       ip            = "10.7.8.135"
       vm_id         = 7008135
       cpu           = "${local.work_cpu}"
       datastore_id  = "${local.datastore_id}"
+      disk_size     = "${local.work_disk_size}"
       ram_dedicated = "${local.work_ram}"
       vlan_id       = "${local.vlan_id}"
       # update        = true
