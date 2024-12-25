@@ -25,7 +25,6 @@ terraform {
   # see e.g. issue #2 (https://github.com/sebiklamar/homelab/pull/2)
   # source = "${include.envcommon.locals.base_source_url}?ref=v0.0.3" # renovate: github-releases=sebiklamar/terraform-modules
   # using hard-coded URL instead of envcommon instead
-  # source = "git::git@github.com:sebiklamar/terraform-modules.git//modules/vehagn-k8s?ref=vehagn-k8s-v0.2.0"
   source = "git::git@github.com:sebiklamar/terraform-modules.git//modules/vehagn-k8s?ref=HEAD"
 }
 
@@ -76,7 +75,7 @@ inputs = {
       disk_size     = "${local.ctrl_disk_size}"
       ram_dedicated = "${local.ctrl_ram}"
       vlan_id       = "${local.vlan_id}"
-      update        = true
+      # update        = true
     }
     # "${local.env}-ctrl-02.${local.domain}" = {
     #   host_node     = "pve2"

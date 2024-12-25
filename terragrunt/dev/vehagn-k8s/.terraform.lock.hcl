@@ -2,43 +2,43 @@
 # Manual edits may be lost in future updates.
 
 provider "registry.opentofu.org/bpg/proxmox" {
-  version     = "0.68.1"
-  constraints = ">= 0.66.1, 0.68.1"
+  version     = "0.69.0"
+  constraints = ">= 0.66.1, 0.69.0"
   hashes = [
-    "h1:IJe7e0ieROpVEkh/XVc48rB526L095Og9wATVj21FOU=",
-    "zh:0092d02c866000e3a45540e44215e1c29fa6b1b8e17fc709c6fd946af8d4cdfd",
-    "zh:0cdb0a8ff6e7303ff20cae39595332797a46135d165db6d1cf2812d9dced069e",
-    "zh:1297d1df20805cb05ceed2825febe1c727605d28ab8cb86322c5abef8a2d2b11",
-    "zh:160e3419ac673c67424189ada0eec42d311db23883787ea5d89cb338e32f2dfc",
-    "zh:363e135c788d6ffef6ccea3716b728c5dc988b2cc965c5bcd09effe98ead2c13",
-    "zh:42e93955f901cc4ab94590d833cd809f1d6fa56fe74591a7b00be795504e9e7a",
-    "zh:435c30942fcb0559af2d57fca1a1d0598691c6cf7a8fb934d5174f836c466cb3",
-    "zh:4698da8796a0b676d4b0ab520511be9c776bc13a30d1a9a5a02fea306db81653",
-    "zh:8351e0d2e7b50ffc33f1df5f36fadd9e138099329280f0e9ef9f272feaa7ad05",
-    "zh:a3ec734a3b5574930b4c93883f8c17a6c6679b835faa4b6e8dab23fe7154157c",
-    "zh:b513e3355fd4b8349ef8b9bf88604c0e8d21a85566cdb4fbd2f9eef471f53fb6",
-    "zh:d55af92feb195c09511caad6ba58b17b05f8f82ff79385a74a29d3ffb79959a2",
+    "h1:qPVErcPtYkDNRCPVL32eUaEW1HKJpfjSr03t5c1EAqM=",
+    "zh:046713ab723f4aecc2886263b3e2fc79f2391c821a81a5346f7ff185edd17f68",
+    "zh:05c19166978a8a81031e502d3934bae5daac17fe44d8f397bb6a67f9bade337b",
+    "zh:12327ed39e85680cfd086bcb0d7ebefd15d352c1cd857e5164d4729122821489",
+    "zh:4f833932192a136dbafc54ee98dcfeb612dc7b679ba5bcb59f7d430721b58f80",
+    "zh:6c5547ee42a6ed6ae40a707c97fd1bf22b082feed8d31f34bcc9447018b7a2c5",
+    "zh:6ee9fe5d73fe283cc4c6cb551b7a5ccd857be65f91872446b772f75f75a2a272",
+    "zh:8a4d23aa38298286bee221db01a8f02492679e5ab877eaa793df4f16af4ed714",
+    "zh:982011abf6ce4499d6b8e00aa7d7ba92229ae641fa8e631b14ced37343f443cc",
+    "zh:a46683898b8d193f40de3837c6ea2bbf8a68ac59e6d4463c307a9931cccb5e42",
+    "zh:ce3ea79bd1b4f3d881e7de8d2e9e0bf86f0c48ad1b71ff4ce48f0ba09b732106",
+    "zh:d20d861810452ee57670d0389e8409644f7b61888c8c9cc67f65cdb06fc3456d",
+    "zh:d6169bdacfc2f88decf2c8f3af47bbf411de914120e128cd53af639a707b6d13",
+    "zh:e8690a35444bfdd3899fef16afcce1ccf4ab9b7140f53e23ba96aa623f84e6c5",
     "zh:f26e0763dbe6a6b2195c94b44696f2110f7f55433dc142839be16b9697fa5597",
-    "zh:f867cd6c967048ea514aafd8c4244755900e80c3dc36537cc6eae6c86d43bf63",
-    "zh:fbf2a7dba132d799f6dcbda0a41ce1bae7c020d057023948a570dab0061640f3",
+    "zh:f9c0df46f852e241eb6342d684466dd9de4b8a1058f1453fbe1ec0ffb6d1fe1a",
   ]
 }
 
 provider "registry.opentofu.org/hashicorp/kubernetes" {
-  version     = "2.35.0"
-  constraints = ">= 2.31.0, >= 2.32.0, 2.35.0"
+  version     = "2.35.1"
+  constraints = ">= 2.31.0, >= 2.32.0, 2.35.1"
   hashes = [
-    "h1:yp4M5CO85kNX2eBgto8lw61x3wc/O39GjQb/z5eGo7k=",
-    "zh:069a9322f9045f1bed49f9d51a60790055f7209d32b96e0562e921e577de9caa",
-    "zh:09510ff5cf0335838d7676fcb0b0d6a2dcbbb07301b51e2afe508412dfdee2aa",
-    "zh:364c1cc71ab3b699caa1519f283be462b19e30819070d3028f20bc7398e18224",
-    "zh:4846067db78f625c42fc743b16aa9e2563e14472726b0e069a373f7c24796416",
-    "zh:67085625bbed572925b81848f6ce8141db7a7be3a819dc9769ba0004d667f2cd",
-    "zh:6877032593e5f356bdfd795b4ef95b526ee0e1ab290e9da012e27bd1e79f8aac",
-    "zh:735e4dbd10e76ce4521f39232dd75cfbbfca950b2ae4d9070e5aef14d9715319",
-    "zh:759125b6b452a560f31c1fc83c392e6cd7383e526edf5118e09fb65cb31e4229",
-    "zh:a6b32f68e8b0f00877161ff5f1032ba4252c39d96f91eb75bbb8f1874caa7512",
-    "zh:e3bd262c675806224ceeabe2805ad65b0bb367fc197417231110d7919b9c425f",
+    "h1:3kVDveERi2qDyLY8zCz/rGmxlGiCAUyJEQR/QiZEIsA=",
+    "zh:0a569918d9e81755bdacb2380e70ed304c442e957a029984cbcd9ec88e5d3635",
+    "zh:1d4d1241cf51d7d4a036c774add1384bb1ba9ca16146334d17c730e1b41ad3e0",
+    "zh:243219f415f5d8caf32a4e6b6bf596c11cf7db5501ccb4ae77cc0b084bb5d108",
+    "zh:2f3a33cba73918adc6f580c76b252881f22beb75277df8ca26a01eb5411348f9",
+    "zh:3b5247f69e72d1e94ac965fa570f448436cedb278f3f29836f6a345aa1bbd5b6",
+    "zh:4206bca7bf30708e235535af50529565b14f30262dc43142153a1774ee5086af",
+    "zh:490c80454b8808bb937498aea98e4076a74887446b05feb6e200015613b5e065",
+    "zh:5e39824289f7b29711681bce98fbb6c27ed221b071a8c78fd0de7f6c2dae4371",
+    "zh:a7bf7892217bdb0464664f62485d89d014874b0dfb564e99c364fc6dd20c6a3b",
+    "zh:e8251170bad1c3e2d9c22d0f4dae7239f1a364f05732f7dff5c8e4ec76a95c5a",
   ]
 }
 
@@ -88,7 +88,6 @@ provider "registry.opentofu.org/siderolabs/talos" {
   version     = "0.6.1"
   constraints = ">= 0.6.0, 0.6.1"
   hashes = [
-    "h1:eFw5nEpptkVQ+SNXFEaYa8o++5Q3WVznDgrxJ78ROLA=",
     "h1:hrKCQJH5lT23NT93+Ok58e8JHUIMbmEOEpYqLBvXwyI=",
     "zh:0fa82a384b25a58b65523e0ea4768fa1212b1f5cfc0c9379d31162454fedcc9d",
     "zh:14f377dd6c3786583e1e8e10d74c762fd7767f84ab048d02cd418920f42686e7",
