@@ -25,7 +25,7 @@ terraform {
   # see e.g. issue #2 (https://github.com/sebiklamar/homelab/pull/2)
   # source = "${include.envcommon.locals.base_source_url}?ref=v0.0.3" # renovate: github-releases=sebiklamar/terraform-modules
   # using hard-coded URL instead of envcommon instead
-  source = "git::git@github.com:sebiklamar/terraform-modules.git//modules/vehagn-k8s?ref=vehagn-k8s-v0.2.0"
+  source = "git::git@github.com:sebiklamar/terraform-modules.git//modules/vehagn-k8s?ref=vehagn-k8s-v1.0.0"
 }
 
 locals {
@@ -34,9 +34,12 @@ locals {
   storage_vmid = 9812
   vlan_id      = 108
   ctrl_cpu     = 2
+  ctrl_disk_size = 10
   ctrl_ram     = 3072
   work_cpu     = 2
+  work_disk_size = 10
   work_ram     = 3072
+  cpu_type     = "x86-64-v2-AES"
   domain       = "test.iseja.net"
   datastore_id = "local-enc"
   cilium_path  = "k8s/core/network/cilium"
@@ -47,14 +50,14 @@ inputs = {
   env = "${local.env}"
 
   image = {
-    version        = "v1.8.3"
-    update_version = "v1.8.3" # renovate: github-releases=siderolabs/talos
+    version        = "v1.8.4"
+    update_version = "v1.8.4" # renovate: github-releases=siderolabs/talos
     schematic      = file("assets/talos/schematic.yaml")
   }
 
   cluster = {
     # ToDo resolve redudundant implementation
-    talos_version   = "v1.8.3"
+    talos_version   = "v1.8.4"
     name            = "${local.env}-vehagn-tg"
     proxmox_cluster = "iseja-lab"
     endpoint        = "10.7.8.121"
@@ -69,6 +72,7 @@ inputs = {
       vm_id         = 7008121
       cpu           = "${local.ctrl_cpu}"
       datastore_id  = "${local.datastore_id}"
+      disk_size     = "${local.ctrl_disk_size}"
       ram_dedicated = "${local.ctrl_ram}"
       vlan_id       = "${local.vlan_id}"
       # update        = true
@@ -80,6 +84,7 @@ inputs = {
       vm_id         = 7008122
       cpu           = "${local.ctrl_cpu}"
       datastore_id  = "${local.datastore_id}"
+      disk_size     = "${local.ctrl_disk_size}"
       ram_dedicated = "${local.ctrl_ram}"
       vlan_id       = "${local.vlan_id}"
       # update        = true
@@ -91,6 +96,7 @@ inputs = {
       vm_id         = 7008123
       cpu           = "${local.ctrl_cpu}"
       datastore_id  = "${local.datastore_id}"
+      disk_size     = "${local.ctrl_disk_size}"
       ram_dedicated = "${local.ctrl_ram}"
       vlan_id       = "${local.vlan_id}"
       # update        = true
@@ -101,7 +107,9 @@ inputs = {
       ip            = "10.7.8.124"
       vm_id         = 7008124
       cpu           = "${local.work_cpu}"
+      cpu_type      = "custom-x86-64-v2-AES-AVX"
       datastore_id  = "${local.datastore_id}"
+      disk_size     = "${local.work_disk_size}"
       ram_dedicated = "${local.work_ram}"
       vlan_id       = "${local.vlan_id}"
       # update        = true
@@ -113,6 +121,7 @@ inputs = {
       vm_id         = 7008125
       cpu           = "${local.work_cpu}"
       datastore_id  = "${local.datastore_id}"
+      disk_size     = "${local.work_disk_size}"
       ram_dedicated = "${local.work_ram}"
       vlan_id       = "${local.vlan_id}"
       # update        = true
