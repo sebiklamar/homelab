@@ -1,27 +1,15 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
-  "extends": [
-    "config:best-practices",
-    ":rebaseStalePrs"
-  ],
-  "assignees": [
-    "sebiklamar"
-  ],
+  "extends": ["config:best-practices", ":rebaseStalePrs"],
+  "assignees": ["sebiklamar"],
   "ignorePaths": ["_attic/**"],
   "terragrunt": {
     "versioning": "regex:^((?<compatibility>.*)-v|v*)(?<major>\\d+)\\.(?<minor>\\d+)\\.(?<patch>\\d+)$"
   },
   "additionalBranchPrefix": "{{packageFileDir}}/",
-  "prBodyColumns": [
-    "Package",
-    "Package file",
-    "Update",
-    "Change"
-  ],
+  "prBodyColumns": ["Package", "Package file", "Update", "Change"],
   "kustomize": {
-    "fileMatch": [
-      "(^|/)kustomization\\.ya?ml(\\.j2)?$"
-    ]
+    "fileMatch": ["(^|/)kustomization\\.ya?ml(\\.j2)?$"]
   },
   "kubernetes": {
     "fileMatch": ["(^|/)k8s/.+\\.yaml$"]
@@ -29,19 +17,17 @@
   "customManagers": [
     {
       "customType": "regex",
-      "fileMatch": [
-        "\\.hcl$",
-        "\\.tf$",
-        "\\.tftpl$",
-        "\\.yaml$",
-        "\\.sh$"
-      ],
+      "fileMatch": ["\\.hcl$", "\\.tf$", "\\.tftpl$", "\\.yaml$", "\\.sh$"],
       "matchStrings": [
         "(?<currentValue>[\\w+\\.\\-]*)['\",;]*\\s*#\\s?renovate: (?<datasource>\\S+)=(?<depName>\\S+)\\s?(registry=(?<registryUrl>\\S+))?\\s?(versioning=(?<versioning>\\S+))?"
       ]
     }
   ],
   "packageRules": [
-    { "matchPackageNames": ["docker.io/mongo"], "allowedVersions": "<=7", "description": "keep mongodb at v7 due to unifi-network-controller" }
+    {
+      "matchPackageNames": ["docker.io/mongo"],
+      "allowedVersions": "<=7",
+      "description": "keep mongodb at v7 due to unifi-network-controller"
+    }
   ]
 }
