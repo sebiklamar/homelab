@@ -131,12 +131,12 @@ inputs = {
   cilium_values  = "${local.root_path}/../${local.cilium_path}/envs/${local.env}/values.yaml"
 
   volumes = {
-  #   pv-test = {
-  #     node    = "pve2"
-  #     size    = "100M"
-  #     vmid    = "${local.storage_vmid}"
-  #     storage = "${local.datastore_id}"
-  #   }
+    pv-mongodb = {
+      node    = "pve5"
+      size    = "500M"
+      vmid    = "${local.storage_vmid}"
+      storage = "${local.datastore_id}"
+    }
   }
 
 }
