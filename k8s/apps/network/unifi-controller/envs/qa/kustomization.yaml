@@ -5,7 +5,7 @@ resources:
   - ../../base
 
 components:
-  - ../../../../../_components/dev
+  - ../../../../../_components/qa
 
 patches:
   - path: deployment-frontend.yaml
