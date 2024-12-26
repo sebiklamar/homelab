@@ -18,7 +18,7 @@ spec:
         app: mongodb
     spec:
       nodeSelector:
-        topology.kubernetes.io/zone: pve2
+        topology.kubernetes.io/zone: pve5
       securityContext:
         runAsNonRoot: false
         # runAsNonRoot: true
