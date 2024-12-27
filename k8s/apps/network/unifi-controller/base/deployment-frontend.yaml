@@ -46,6 +46,8 @@ spec:
               value: '27017'
             - name: MONGO_DBNAME
               value: unifidb
+            - name: MONGO_AUTHSOURCE
+              value: admin
           resources:
             requests:
               cpu: 50m

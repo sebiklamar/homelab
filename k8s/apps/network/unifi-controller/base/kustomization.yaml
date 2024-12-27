@@ -13,4 +13,4 @@ configMapGenerator:
   - name: mongodb-init
     namespace: unifi
     files:
-      - assets/init-mongo.js
+      - assets/init-mongo.sh

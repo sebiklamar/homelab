@@ -46,6 +46,18 @@ spec:
               value: '999'
             - name: TZ
               value: Europe/Berlin
+            - name: MONGO_AUTHSOURCE
+              value: admin
+            - name: MONGO_INITDB_ROOT_USERNAME
+              value: rootuser
+            - name: MONGO_INITDB_ROOT_PASSWORD
+              value: rootpass
+            - name: MONGO_USER
+              value: unifiuser
+            - name: MONGO_PASS
+              value: unifipass
+            - name: MONGO_DBNAME
+              value: unifidb
           resources:
             requests:
               cpu: 50m
@@ -55,8 +67,8 @@ spec:
               memory: 500Mi
           volumeMounts:
             - name: mongodb-init
-              mountPath: /docker-entrypoint-initdb.d/init-mongo.js
-              subPath: init-mongo.js
+              mountPath: /docker-entrypoint-initdb.d/init-mongo.sh
+              subPath: init-mongo.sh
               readOnly: true
             - name: mongodb-data
               mountPath: /data/db
