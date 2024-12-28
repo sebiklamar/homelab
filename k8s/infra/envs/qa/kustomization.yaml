@@ -3,3 +3,4 @@ kind: Kustomization
 
 resources:
   - ../../storage/proxmox-csi/envs/qa
+  - ../../network/cert-manager/envs/qa
