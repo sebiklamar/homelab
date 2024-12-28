@@ -7,5 +7,5 @@ metadata:
 data:
   CLUSTER_ENVIRONMENT: dev
   CLUSTER_NAME: dev-vehagn-tg
-  DOMAIN_BASE: test.iseja
+  DOMAIN_BASE: dev.iseja
   DOMAIN_TLD: net

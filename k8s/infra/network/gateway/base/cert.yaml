@@ -1,0 +1,17 @@
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: cert
+  namespace: gateway
+spec:
+  dnsNames:
+    - "*.example.com"
+    - example.com
+  issuerRef:
+    group: cert-manager.io
+    kind: ClusterIssuer
+    name: cloudflare-cluster-issuer
+  secretName: cert
+  usages:
+    - digital signature
+    - key encipherment

@@ -2,6 +2,6 @@ apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 
 resources:
-  - ../../network/gateway/envs/dev
-  - ../../network/cilium/envs/dev
   - ../../controller/sealed-secrets/envs/dev
+  - ../../network/cilium/envs/dev
+  - ../../network/gateway/envs/dev

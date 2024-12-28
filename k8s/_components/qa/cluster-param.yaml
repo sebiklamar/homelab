@@ -7,5 +7,5 @@ metadata:
 data:
   CLUSTER_ENVIRONMENT: qa
   CLUSTER_NAME: qa-vehagn-tg
-  DOMAIN_BASE: test.iseja
+  DOMAIN_BASE: qa.iseja
   DOMAIN_TLD: net
