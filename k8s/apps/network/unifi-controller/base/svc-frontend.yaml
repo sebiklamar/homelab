@@ -14,3 +14,18 @@ spec:
     - name: https-alt
       port: 8443
       targetPort: web-admin
+    - name: device-comm
+      port: 8080
+      protocol: TCP
+    - name: stun
+      port: 3478
+      protocol: UDP
+    - name: unifi-disc
+      port: 10001
+      protocol: UDP
+    - name: secure-redirect
+      port: 8843
+      protocol: TCP
+    - name: http-redirect
+      port: 8880
+      protocol: TCP

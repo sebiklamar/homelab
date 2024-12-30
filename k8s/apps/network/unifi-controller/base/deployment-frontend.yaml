@@ -56,39 +56,37 @@ spec:
               cpu: 1000m
               memory: 1000Mi
           ports:
+            # required
             - name: web-admin
               containerPort: 8443
               protocol: TCP
-            - name: device-comm
-              containerPort: 8080
-              protocol: TCP
-            - name: stun
-              containerPort: 3478
-              protocol: UDP
-            - name: secure-redirect
-              containerPort: 8843
-              protocol: TCP
-            - name: http-redirect
-              containerPort: 8880
-              protocol: TCP
+            # required
             - name: speedtest
               containerPort: 6789
               protocol: TCP
+            # required
+            - name: device-comm
+              containerPort: 8080
+              protocol: TCP
+            # optional
+            - name: http-redirect
+              containerPort: 8880
+              protocol: TCP
+            # optional
+            - name: secure-redirect
+              containerPort: 8843
+              protocol: TCP
+            # required
+            - name: stun
+              containerPort: 3478
+              protocol: UDP
+            # optional
+            - name: snmp-trap
+              containerPort: 5514
+              protocol: UDP
+            # required
             - name: unifi-disc
               containerPort: 10001
               protocol: UDP
-            - name: unifi-disc-l2
-              containerPort: 1900
-              protocol: UDP
 #    volumes:
 #      - /srv/docker-compose/hosts/unifi/data:/config
-#    ports:
-#      - 8443:8443
-#      - 3478:3478/udp
-#      - 10001:10001/udp
-#      - 8080:8080
-#      - 1900:1900/udp #optional
-#      - 8843:8843 #optional
-#      - 8880:8880 #optional
-#      - 6789:6789 #optional
-#      - 5514:5514/udp #optional
