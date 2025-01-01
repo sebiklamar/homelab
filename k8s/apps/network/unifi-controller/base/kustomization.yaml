@@ -8,6 +8,7 @@ resources:
   - deployment-frontend.yaml
   - svc-db.yaml
   - svc-frontend.yaml
+  - tls-route.yaml
 
 configMapGenerator:
   - name: mongodb-init
